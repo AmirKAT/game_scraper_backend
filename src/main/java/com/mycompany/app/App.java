@@ -8,8 +8,8 @@ public class App {
     	try {
     		EnebaScraper enebaScraper = new EnebaScraper();
 				enebaScraper.start();
-				AmazonScraper amazonScraper = new AmazonScraper();
-				amazonScraper.start();
+//				AmazonScraper amazonScraper = new AmazonScraper();
+//				amazonScraper.start();
 			}
     	catch(Exception ex) {
     		ex.printStackTrace();
