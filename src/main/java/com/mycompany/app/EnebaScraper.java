@@ -11,6 +11,7 @@ public class EnebaScraper extends WebScraper {
 	public void run() {
 		stopThread = false;
 		while(!stopThread) {			
+			
 			try {
 				scrapeEnebaGameData();
 				sleep(6000);
@@ -80,6 +81,7 @@ public class EnebaScraper extends WebScraper {
 	    						System.out.println("Platform: " + platform.text());
 	    					
 	    				}
+	    				
 	    			}//end of url2 for loop
 	    			
 	    		}// end of game link for loop

@@ -6,10 +6,10 @@ public class App {
 	
     public static void main( String[] args ) {
     	try {
-    		EnebaScraper enebaScraper = new EnebaScraper();
-				enebaScraper.start();
-//				AmazonScraper amazonScraper = new AmazonScraper();
-//				amazonScraper.start();
+//    		EnebaScraper enebaScraper = new EnebaScraper();
+//				enebaScraper.start();
+				MmogaScraper mmogaScraper = new MmogaScraper();
+				mmogaScraper.start();
 			}
     	catch(Exception ex) {
     		ex.printStackTrace();
