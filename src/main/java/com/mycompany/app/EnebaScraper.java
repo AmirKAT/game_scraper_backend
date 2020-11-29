@@ -14,7 +14,7 @@ public class EnebaScraper extends WebScraper {
 			
 			try {
 				scrapeEnebaGameData();
-				sleep(6000);
+				sleep(10000);
 			}
 			catch(Exception ex) {
 				ex.printStackTrace();
@@ -43,7 +43,7 @@ public class EnebaScraper extends WebScraper {
 	  		
 	    		// Gets the title of the game 
 	    		Elements title = prodWrappers.get(j).select("._1ZwRcm");
-	    			System.out.println("Title: " + title.text());
+	    			System.out.println("\nTitle: " + title.text());
 	    		
 	    		// Gets the image of the game
 	    		Elements image = prodWrappers.get(j).select("img");
@@ -61,7 +61,7 @@ public class EnebaScraper extends WebScraper {
 	    		for(Element linkUrl : link) {
 	    			
 	    			String linkGame = linkUrl.attributes().get("href");
-	    				System.out.println("Link: " + linkGame );
+	    				System.out.println("Link: " + "https://www.eneba.com" + linkGame );
 	    			
 	    			//scraping info from each linkGame
 	    			for(int b=0; b<link.size(); b++) {
@@ -77,8 +77,20 @@ public class EnebaScraper extends WebScraper {
 	    					Elements genre = prods2.get(c).select("._3w9_g5");
 	    						System.out.println("Genre: " + genre.text());
 	    					
-	    					Elements platform = prods2.get(c).select("._3Rlqdg");
-	    						System.out.println("Platform: " + platform.text());
+	    					Elements platform = prods2.get(c).select(".vPLrj2");
+	    						
+	    						for(int k=0; k<platform.size(); k++) {
+	    							
+	    							Elements getPlatformTitle = platform.get(k).select("img");
+	    							
+	    							for(Element getPlatform : getPlatformTitle) {
+	    								
+	    								String platformName = getPlatform.attributes().get("alt");
+	  	    							System.out.println("Platform: " + platformName);
+	    								
+	    							}//getting platform name
+	    							
+	    						}//end of for k
 	    					
 	    				}//end of for loop to connect to link game
 	    				
@@ -88,7 +100,7 @@ public class EnebaScraper extends WebScraper {
 	
 	    		// Gets the price of the game
 	    		Elements price = prodWrappers.get(j).select("._3RZkEb");
-	    			System.out.println("Price: " + price.text() + "\n");
+	    			System.out.println("Price: " + price.text());
 	    		
 	  		}//end of 3rd for loop
   		

@@ -1,7 +1,6 @@
 package com.mycompany.app;
 
 import java.io.IOException;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,7 +14,7 @@ public class MmogaScraper extends WebScraper {
 			
 			try {
 				scrapeMmogaGameData();
-				sleep(6000);
+				sleep(10000);
 			}
 			catch(Exception ex) {
 				ex.printStackTrace();
