@@ -50,7 +50,7 @@ public class MmogaScraper extends WebScraper {
 		    			
 		    			String titleGame = titleText.attributes().get("title");
 		    				System.out.println("\nTitle: " + titleGame);
-		    		}
+		    		}//end of for getting titleGame
 	  				
 	  			}//end of for k
 	  			
@@ -64,7 +64,7 @@ public class MmogaScraper extends WebScraper {
 		    			
 		    			String imageGame = imageUrl.attributes().get("data-background");
 		    				System.out.println("Image: " + "https://www.mmoga.co.uk" + imageGame);
-		    		}
+		    		}//end of for getting imageUrl
 	  				
 	  			}//end of for k1
 	  			
@@ -76,6 +76,43 @@ public class MmogaScraper extends WebScraper {
 		    			System.out.println("Price: " + getPrice.text());
 	  				
 	  			}//end of for k2
+	  			
+	  			Elements link = prodWrappers.get(j).select(".keyImg");
+	  			
+	  			for(int k3=0; k3<link.size(); k3++) {
+	  				
+	  				Elements getLink = link.get(k3).select("a");
+	  				
+	  				for(Element linkUrl : getLink) {
+	  					
+	  					String linkGame = linkUrl.attributes().get("href");
+	  						System.out.println("Link: " + "https://www.mmoga.co.uk" + linkGame);
+	  						
+	  						for(int b=0; b<link.size(); b++) {
+	  	    				
+	  	    				String url2 = "https://www.mmoga.co.uk" + linkGame;
+	  	    				
+	  	    				Document doc2 = Jsoup.connect(url2).get();
+	  	    				
+	  	    				Elements prods2 = doc2.select(".proLogo");
+	  	    				
+	  	    				for(int k4=0; k4<prods2.size(); k4++) {
+	  	    					
+	  	    					Elements getPlatform = prods2.select("img");
+	  	    					
+	  	    					for(Element platform : getPlatform) {
+	  	    						
+	  	    						String gamePlatform = platform.attributes().get("alt");
+	  	    							System.out.println("Platform: " + gamePlatform);
+	  	    					}
+	  	    					
+	  	    				}//end of for k4
+	  	    				
+	  						}//end of game link info
+	  					
+	  				}//end of for getLink
+	  				
+	  			}//end of for k3
 	  			
 	  		}//end of for j
 	  		

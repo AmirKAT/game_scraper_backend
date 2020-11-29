@@ -80,7 +80,7 @@ public class EnebaScraper extends WebScraper {
 	    					Elements platform = prods2.get(c).select("._3Rlqdg");
 	    						System.out.println("Platform: " + platform.text());
 	    					
-	    				}
+	    				}//end of for loop to connect to link game
 	    				
 	    			}//end of url2 for loop
 	    			
