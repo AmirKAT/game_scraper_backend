@@ -70,6 +70,50 @@ public class GamingDragonScraper extends WebScraper {
 	  				
 	  			}//end of k2 for
 	  			
+	  			Elements price = prodWrappers.get(j).select(".game-price");
+  				System.out.println("Price: " + price.text());
+	  			
+	  			Elements link = prodWrappers.get(j).select(".game-img");
+	  			
+	  			for(int k3=0; k3<link.size(); k3++) {
+	  				
+	  				Elements getLink = link.get(k3).select("a");
+	  				
+	  				for(Element gameLink : getLink) {
+	  					
+	  					String linkGame = gameLink.attributes().get("href");
+	  						System.out.println("Link: " + "https://www.gamingdragons.com" + linkGame);
+	  						
+	  						for(int b=0; b<link.size(); b++) {
+	  	    				
+	  	    				String url2 = "https://www.gamingdragons.com" + linkGame;
+	  	    				
+	  	    				Document doc2 = Jsoup.connect(url2).get();
+	  	    				
+	  	    				Elements prods2 = doc2.select("#product");
+	  	    				
+	  	    				for(int k4=0; k4<prods2.size(); k4++) {
+	  	    					
+	  	    					Elements genre = prods2.select(".miniInfo");
+
+	  	    					for(int k5=0; k5<genre.size(); k5++) {
+	  	    						
+	  	    						Elements getGenre = genre.get(k5).select("a");
+	  	    							System.out.println("Genre: " + getGenre.text());
+	  	    						
+	  	    					}//end of getGenre
+	  	    						
+	  	    					Elements platform = prods2.select(".linka");
+	  	    						System.out.println("Platform: " + platform.text());
+	  	    					
+	  	    				}//end of for k4
+	  	    				
+	  						}//end of game link info
+	  						
+	  				}//getting game link
+	  				
+	  			}//end of k3 for
+	  			
 	  		}//end of 3rd for
 	  		
 	  	}//end of 2nd for

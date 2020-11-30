@@ -58,6 +58,10 @@ public class EnebaScraper extends WebScraper {
 	    		// Gets the link of the game
 	    		Elements link = prodWrappers.get(j).select("._2idjXd");
 	    		
+	    		// Gets the price of the game
+	    		Elements price = prodWrappers.get(j).select("._3RZkEb");
+	    			System.out.println("Price: " + price.text());
+	    		
 	    		for(Element linkUrl : link) {
 	    			
 	    			String linkGame = linkUrl.attributes().get("href");
@@ -97,10 +101,6 @@ public class EnebaScraper extends WebScraper {
 	    			}//end of url2 for loop
 	    			
 	    		}// end of game link for loop
-	
-	    		// Gets the price of the game
-	    		Elements price = prodWrappers.get(j).select("._3RZkEb");
-	    			System.out.println("Price: " + price.text());
 	    		
 	  		}//end of 3rd for loop
   		
