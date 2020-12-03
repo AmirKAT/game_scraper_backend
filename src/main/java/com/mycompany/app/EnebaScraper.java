@@ -23,9 +23,9 @@ public class EnebaScraper extends WebScraper {
 	}
 	
 	void scrapeEnebaGameData() throws IOException {
-		for(int a=1; a<500; a++) {
+		for(int a=1; a<62; a++) {
 			
-  		String url = "https://www.eneba.com/store?page=" + a + "&regions[]=emea&regions[]=europe&regions[]=global&regions[]=united_kingdom&types[]=game";
+  		String url = "https://www.eneba.com/store?page=" + a + "&platforms[]=XBOX&regions[]=emea&regions[]=europe&regions[]=global&regions[]=united_kingdom&types[]=game";
   				System.out.println("Scraping Eneba page " + a);
 
   		// Downloading HTML document from the site
@@ -80,21 +80,6 @@ public class EnebaScraper extends WebScraper {
 	    					
 	    					Elements genre = prods2.get(c).select("._3w9_g5");
 	    						System.out.println("Genre: " + genre.text());
-	    					
-	    					Elements platform = prods2.get(c).select(".vPLrj2");
-	    						
-	    						for(int k=0; k<platform.size(); k++) {
-	    							
-	    							Elements getPlatformTitle = platform.get(k).select("img");
-	    							
-	    							for(Element getPlatform : getPlatformTitle) {
-	    								
-	    								String platformName = getPlatform.attributes().get("alt");
-	  	    							System.out.println("Platform: " + platformName);
-	    								
-	    							}//getting platform name
-	    							
-	    						}//end of for k
 	    					
 	    				}//end of for loop to connect to link game
 	    				

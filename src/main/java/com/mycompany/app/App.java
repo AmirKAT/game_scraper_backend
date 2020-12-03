@@ -18,7 +18,7 @@ public class App {
 //    	catch(Exception ex) {
 //    		ex.printStackTrace();
 //    	}
-    	
+//
     	try {
 				GamingDragonScraper gamingDragonScraper = new GamingDragonScraper();
 				gamingDragonScraper.start();
@@ -26,5 +26,13 @@ public class App {
     	catch(Exception ex) {
     		ex.printStackTrace();
     	}
+//    	
+//    	try {
+//				AmazonGamesScraper AmazonGamesScraper = new AmazonGamesScraper();
+//				AmazonGamesScraper.start();
+//			}
+//    	catch(Exception ex) {
+//    		ex.printStackTrace();
+//    	}
     }
 	}

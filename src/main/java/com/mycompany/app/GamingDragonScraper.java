@@ -24,9 +24,9 @@ public class GamingDragonScraper extends WebScraper {
 	}
 	
 	void scrapeGamingDragonGameData() throws IOException {
-		for(int a=1; a<100; a++) {
+		for(int a=1; a<7; a++) {
 			
-  		String url = "https://www.gamingdragons.com/en/all-games?page=" + a;
+  		String url = "https://www.gamingdragons.com/en/xbox-live?page=" + a;
   				System.out.println("Scraping GamingDragons page " + a);
 
   		// Downloading HTML document from the site
@@ -102,9 +102,6 @@ public class GamingDragonScraper extends WebScraper {
 	  	    							System.out.println("Genre: " + getGenre.text());
 	  	    						
 	  	    					}//end of getGenre
-	  	    						
-	  	    					Elements platform = prods2.select(".linka");
-	  	    						System.out.println("Platform: " + platform.text());
 	  	    					
 	  	    				}//end of for k4
 	  	    				

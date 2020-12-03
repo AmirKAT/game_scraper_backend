@@ -23,9 +23,9 @@ public class MmogaScraper extends WebScraper {
 	}
 	
 	void scrapeMmogaGameData() throws IOException {
-		for(int a=1; a<100; a++) {
+		for(int a=1; a<10; a++) {
 			
-  		String url = "https://www.mmoga.co.uk/Game-Keys/page-" + a + "/";
+  		String url = "https://www.mmoga.co.uk/Game-Keys/page-" + a + "/?Platform=Xbox-LIVE&Type=Full-Game";
   				System.out.println("Scraping MMOGA page " + a);
 
   		// Downloading HTML document from the site
@@ -86,28 +86,6 @@ public class MmogaScraper extends WebScraper {
 	  					
 	  					String linkGame = linkUrl.attributes().get("href");
 	  						System.out.println("Link: " + "https://www.mmoga.co.uk" + linkGame);
-	  						
-	  						for(int b=0; b<link.size(); b++) {
-	  	    				
-	  	    				String url2 = "https://www.mmoga.co.uk" + linkGame;
-	  	    				
-	  	    				Document doc2 = Jsoup.connect(url2).get();
-	  	    				
-	  	    				Elements prods2 = doc2.select(".proLogo");
-	  	    				
-	  	    				for(int k4=0; k4<prods2.size(); k4++) {
-	  	    					
-	  	    					Elements getPlatform = prods2.select("img");
-	  	    					
-	  	    					for(Element platform : getPlatform) {
-	  	    						
-	  	    						String gamePlatform = platform.attributes().get("alt");
-	  	    							System.out.println("Platform: " + gamePlatform);
-	  	    					}
-	  	    					
-	  	    				}//end of for k4
-	  	    				
-	  						}//end of game link info
 	  					
 	  				}//end of for getLink
 	  				
