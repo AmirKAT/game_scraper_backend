@@ -19,13 +19,13 @@ public class App {
 //    		ex.printStackTrace();
 //    	}
 //
-    	try {
-				GamingDragonScraper gamingDragonScraper = new GamingDragonScraper();
-				gamingDragonScraper.start();
-			}
-    	catch(Exception ex) {
-    		ex.printStackTrace();
-    	}
+//    	try {
+//				GamingDragonScraper gamingDragonScraper = new GamingDragonScraper();
+//				gamingDragonScraper.start();
+//			}
+//    	catch(Exception ex) {
+//    		ex.printStackTrace();
+//    	}
 //    	
 //    	try {
 //				AmazonGamesScraper AmazonGamesScraper = new AmazonGamesScraper();
@@ -34,5 +34,12 @@ public class App {
 //    	catch(Exception ex) {
 //    		ex.printStackTrace();
 //    	}
+    	try {
+				ZatuGamesScraper zatuGamesScraper = new ZatuGamesScraper();
+				zatuGamesScraper.start();
+			}
+    	catch(Exception ex) {
+    		ex.printStackTrace();
+    	}
     }
 	}
