@@ -22,6 +22,13 @@ public class MmogaScraper extends WebScraper {
 		}
 	}
 	
+//data required || variable name that scrapes the data
+//--------------||------------------------------------
+//title  			  ||	titles
+//image  			  ||	images
+//price 			  ||	prices
+//link  			  ||  links
+	
 	void scrapeMmogaGameData() throws IOException {
 		for(int a=1; a<10; a++) {
 			
@@ -47,8 +54,8 @@ public class MmogaScraper extends WebScraper {
 	  				
 	  				for(Element titleText : getTitle) {
 		    			
-		    			String titleGame = titleText.attributes().get("title");
-		    				System.out.println("\nTitle: " + titleGame);
+		    			String titles = titleText.attributes().get("title");
+		    				System.out.println("\nTitle: " + titles);
 		    		}//end of for getting titleGame
 	  				
 	  			}//end of for k
@@ -62,7 +69,8 @@ public class MmogaScraper extends WebScraper {
 	  				for(Element imageUrl : getImage) {
 		    			
 		    			String imageGame = imageUrl.attributes().get("data-background");
-		    				System.out.println("Image: " + "https://www.mmoga.co.uk" + imageGame);
+		    				String images = "https://www.mmoga.co.uk" + imageGame;
+		    				System.out.println("Image: " + images);
 		    		}//end of for getting imageUrl
 	  				
 	  			}//end of for k1
@@ -71,8 +79,8 @@ public class MmogaScraper extends WebScraper {
 	  			
 	  			for(int k2=0; k2<price.size(); k2++) {
 	  				
-	  				Elements getPrice = price.get(k2).select("del");
-		    			System.out.println("Price: " + getPrice.text());
+	  				String prices = price.get(k2).select("del").text();
+		    			System.out.println("Price: " + prices);
 	  				
 	  			}//end of for k2
 	  			
@@ -85,7 +93,8 @@ public class MmogaScraper extends WebScraper {
 	  				for(Element linkUrl : getLink) {
 	  					
 	  					String linkGame = linkUrl.attributes().get("href");
-	  						System.out.println("Link: " + "https://www.mmoga.co.uk" + linkGame);
+	  						String links = "https://www.mmoga.co.uk" + linkGame;
+	  						System.out.println("Link: " + links);
 	  					
 	  				}//end of for getLink
 	  				

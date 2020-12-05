@@ -34,7 +34,7 @@ public class App {
     	catch(Exception ex) {
     		ex.printStackTrace();
     	}
-    	
+   	
     	try {
 				ZatuGamesScraper zatuGamesScraper = new ZatuGamesScraper();
 				zatuGamesScraper.start();

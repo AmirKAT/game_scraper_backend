@@ -23,10 +23,17 @@ public class AmazonGamesScraper extends WebScraper{
 		}
 	}
 	
+//data required || variable name that scrapes the data
+//--------------||------------------------------------
+//title  			  ||	titles
+//image  			  ||	images
+//price 			  ||	prices
+//link  			  ||  links
+	
 	void scrapeAmazonGameData() throws IOException {
 		for(int a=1; a<333; a++) {
 			
-  		String url = "https://www.amazon.co.uk/s?i=videogames&rh=n%3A13978691031&page=" + a + "&qid=1606997309&rd=1&ref=sr_pg_" + a;
+  		String url = "https://www.amazon.co.uk/s?i=videogames&rh=n%3A13978691031&page=" + a + "&qid=1607156844&rd=1&ref=sr_pg_" + a;
   				System.out.println("Scraping AmazonGames page " + a);
 
   		// Downloading HTML document from the site
@@ -40,22 +47,23 @@ public class AmazonGamesScraper extends WebScraper{
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
 	  			
-	  			Elements title = prodWrappers.get(j).select(".a-size-medium.a-color-base.a-text-normal");
-	  				System.out.println("\nTitle: " + title.text());
+	  			String titles = prodWrappers.get(j).select(".a-size-medium.a-color-base.a-text-normal").text();
+	  				System.out.println("\nTitle: " + titles);
 	  				
 	  			Elements image = prodWrappers.get(j).select("img");
 	  			
 	  			for(Element gameImage : image) {
 	  				
-	  				String imageGame = gameImage.attributes().get("src");
-	  					System.out.println("Image: " + imageGame);
+	  				String images = gameImage.attributes().get("src");
+	  					System.out.println("Image: " + images);
 	  				
 	  			}//end of getting image link
 	  			
 	  			Element price = prodWrappers.get(j).select(".a-offscreen").first();
 	  				
 	  			if (price != null) {
-	  				System.out.println("Price: " + price.text());
+	  				String prices = price.text();
+	  				System.out.println("Price: " + prices);
 	  			}//ignoring products where price is null
 	  			
 	  			Elements link = prodWrappers.get(j).select("a.a-link-normal.s-no-outline");
@@ -63,7 +71,8 @@ public class AmazonGamesScraper extends WebScraper{
 	  			for(Element gameLink : link) {
 	  				
 	  				String linkGame = gameLink.attributes().get("href");
-	  					System.out.println("Link: " + "https://www.amazon.co.uk" + linkGame);
+	  					String links = "https://www.amazon.co.uk" + linkGame;
+	  					System.out.println("Link: " + links);
 	  				
 	  			}//end of getting image link
 	  			

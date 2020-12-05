@@ -23,6 +23,14 @@ public class GamingDragonScraper extends WebScraper {
 		}
 	}
 	
+//data required || variable name that scrapes the data
+//--------------||------------------------------------
+//title  			  ||	titles
+//image  			  ||	images
+//price 			  ||	prices
+//link  			  ||  links
+//genre  			  ||	genres
+	
 	void scrapeGamingDragonGameData() throws IOException {
 		for(int a=1; a<7; a++) {
 			
@@ -48,8 +56,8 @@ public class GamingDragonScraper extends WebScraper {
 	  				
 	  				for(Element gameTitle : getTitle) {
 	  					
-	  					String titleGame = gameTitle.attributes().get("title");
-	  						System.out.println("\nTitle: " + titleGame);
+	  					String titles = gameTitle.attributes().get("title");
+	  						System.out.println("\nTitle: " + titles);
 	  					
 	  				}//getting game title
 	  				
@@ -64,14 +72,15 @@ public class GamingDragonScraper extends WebScraper {
 	  				for(Element gameImage : getImage) {
 	  					
 	  					String imageGame = gameImage.attributes().get("src");
-	  						System.out.println("Image: " + "http:" + imageGame);
+	  						String images = "http:" + imageGame;
+	  						System.out.println("Image: " + images);
 	  						
 	  				}//getting game image
 	  				
 	  			}//end of k2 for
 	  			
-	  			Elements price = prodWrappers.get(j).select(".game-price");
-  				System.out.println("Price: " + price.text());
+	  			String prices = prodWrappers.get(j).select(".game-price").text();
+  				System.out.println("Price: " + prices);
 	  			
 	  			Elements link = prodWrappers.get(j).select(".game-img");
 	  			
@@ -82,7 +91,8 @@ public class GamingDragonScraper extends WebScraper {
 	  				for(Element gameLink : getLink) {
 	  					
 	  					String linkGame = gameLink.attributes().get("href");
-	  						System.out.println("Link: " + "https://www.gamingdragons.com" + linkGame);
+	  						String links = "https://www.gamingdragons.com" + linkGame;
+	  						System.out.println("Link: " + links);
 	  						
 	  						for(int b=0; b<link.size(); b++) {
 	  	    				
@@ -98,8 +108,8 @@ public class GamingDragonScraper extends WebScraper {
 
 	  	    					for(int k5=0; k5<genre.size(); k5++) {
 	  	    						
-	  	    						Elements getGenre = genre.get(k5).select("a");
-	  	    							System.out.println("Genre: " + getGenre.text());
+	  	    						String genres = genre.get(k5).select("a").text();
+	  	    							System.out.println("Genre: " + genres);
 	  	    						
 	  	    					}//end of getGenre
 	  	    					

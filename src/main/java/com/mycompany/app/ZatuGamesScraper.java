@@ -23,8 +23,15 @@ public class ZatuGamesScraper extends WebScraper{
 		}
 	}
 	
+//data required || variable name that scrapes the data
+//--------------||------------------------------------
+//title  			  ||	titles
+//image  			  ||	images
+//price 			  ||	prices
+//link  			  ||  links
+	
 	void scrapeZatuGamesGameData() throws IOException {
-		for(int a=1; a<333; a++) {
+		for(int a=1; a<24; a++) {
 			
   		String url = "https://www.board-game.co.uk/category/video-games/?min=0&max=300&video-game-platform=xbox-one&page=" + a;
   				System.out.println("Scraping ZatuGames page " + a);
@@ -40,8 +47,8 @@ public class ZatuGamesScraper extends WebScraper{
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
 
-	  			Elements title = prodWrappers.get(j).select(".zg-product-title");
-  				System.out.println("\nTitle: " + title.text());
+	  			String titles = prodWrappers.get(j).select(".zg-product-title").text();
+  				System.out.println("\nTitle: " + titles);
   				
 	  			Elements imageContainer = prodWrappers.get(j).select(".zg-product-image-container");
 	  			
@@ -51,16 +58,16 @@ public class ZatuGamesScraper extends WebScraper{
 	  				
 		  			for(Element gameImage : image) {
 		  				
-		  				String imageGame = gameImage.attributes().get("src");
-		  					System.out.println("Image: " + imageGame);
+		  				String images = gameImage.attributes().get("src");
+		  					System.out.println("Image: " + images);
 		  			}
 	  				
 	  			}//end of getting image
 	  			
-	  			Element price = prodWrappers.get(j).select("span.woocommerce-Price-amount.amount").first();
+	  			String prices = prodWrappers.get(j).select("span.woocommerce-Price-amount.amount").first().text();
 	  			
-	  			if (price != null) {
-	  				System.out.println("Price: " + price.text());
+	  			if (prices != null) {
+	  				System.out.println("Price: " + prices);
 	  			}//ignoring products where price is null
 	  			
 	  			Elements linkContainer = prodWrappers.get(j).select(".zg-product-image-container");
@@ -71,8 +78,8 @@ public class ZatuGamesScraper extends WebScraper{
 	  				
 		  			for(Element gameLink : link) {
 		  				
-		  				String linkGame = gameLink.attributes().get("href");
-		  					System.out.println("Link: " + linkGame);
+		  				String links = gameLink.attributes().get("href");
+		  					System.out.println("Link: " + links);
 		  			}
 	  				
 	  			}//end of getting game link
