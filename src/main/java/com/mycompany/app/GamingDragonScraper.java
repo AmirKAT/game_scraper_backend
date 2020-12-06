@@ -7,8 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.mycompany.app.dao.ProductDao;
+import com.mycompany.app.entity.Product;
+
 public class GamingDragonScraper extends WebScraper {
-	
+	ProductDao productDao = null;
 	public void run() {
 		stopThread = false;
 		while(!stopThread) {			
@@ -36,7 +39,7 @@ public class GamingDragonScraper extends WebScraper {
 			
   		String url = "https://www.gamingdragons.com/en/xbox-live?page=" + a;
   				System.out.println("Scraping GamingDragons page " + a);
-
+  		System.out.println("url:"+url);		
   		// Downloading HTML document from the site
 	  	Document doc = Jsoup.connect(url).get();
 	  	
@@ -47,6 +50,7 @@ public class GamingDragonScraper extends WebScraper {
 	  		Elements prodWrappers = prods.select(".game-info-box");
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
+	  			Product product = new Product(); 
 	  			
 	  			Elements title = prodWrappers.get(j).select(".game-title");
 	  			
@@ -58,7 +62,7 @@ public class GamingDragonScraper extends WebScraper {
 	  					
 	  					String titles = gameTitle.attributes().get("title");
 	  						System.out.println("\nTitle: " + titles);
-	  					
+	  						product.setTitle(titles);
 	  				}//getting game title
 	  				
 	  			}//end of k for
@@ -74,14 +78,14 @@ public class GamingDragonScraper extends WebScraper {
 	  					String imageGame = gameImage.attributes().get("src");
 	  						String images = "http:" + imageGame;
 	  						System.out.println("Image: " + images);
-	  						
+	  						product.setImage(images);
 	  				}//getting game image
 	  				
 	  			}//end of k2 for
 	  			
 	  			String prices = prodWrappers.get(j).select(".game-price").text();
   				System.out.println("Price: " + prices);
-	  			
+	  			product.setPrice(prices);
 	  			Elements link = prodWrappers.get(j).select(".game-img");
 	  			
 	  			for(int k3=0; k3<link.size(); k3++) {
@@ -93,7 +97,7 @@ public class GamingDragonScraper extends WebScraper {
 	  					String linkGame = gameLink.attributes().get("href");
 	  						String links = "https://www.gamingdragons.com" + linkGame;
 	  						System.out.println("Link: " + links);
-	  						
+	  						product.setLink(links);
 	  						for(int b=0; b<link.size(); b++) {
 	  	    				
 	  	    				String url2 = "https://www.gamingdragons.com" + linkGame;
@@ -120,7 +124,7 @@ public class GamingDragonScraper extends WebScraper {
 	  				}//getting game link
 	  				
 	  			}//end of k3 for
-	  			
+	  			productDao.save(product);
 	  		}//end of 3rd for
 	  		
 	  	}//end of 2nd for
@@ -128,5 +132,7 @@ public class GamingDragonScraper extends WebScraper {
 		}//end of 1st for
 		
 	}//end of scrapeGamingDragonGameData
-
+	 public void setProductDao(ProductDao productDao) {
+		 this.productDao = productDao;
+	 }
 }//end of public class

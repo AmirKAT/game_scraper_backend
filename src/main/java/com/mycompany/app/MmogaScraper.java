@@ -6,8 +6,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.mycompany.app.dao.ProductDao;
+import com.mycompany.app.entity.Product;
+
 public class MmogaScraper extends WebScraper {
-	
+	ProductDao productDao = null;
 	public void run() {
 		stopThread = false;
 		while(!stopThread) {			
@@ -42,6 +45,8 @@ public class MmogaScraper extends WebScraper {
 	  	
 	  	for(int i=0; i<prods.size(); i++) {
 	  		
+	  		Product product = new Product();
+	  		
 	  		Elements prodWrappers = prods.select("li");
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
@@ -56,6 +61,7 @@ public class MmogaScraper extends WebScraper {
 		    			
 		    			String titles = titleText.attributes().get("title");
 		    				System.out.println("\nTitle: " + titles);
+		    				product.setTitle(titles);
 		    		}//end of for getting titleGame
 	  				
 	  			}//end of for k
@@ -71,6 +77,7 @@ public class MmogaScraper extends WebScraper {
 		    			String imageGame = imageUrl.attributes().get("data-background");
 		    				String images = "https://www.mmoga.co.uk" + imageGame;
 		    				System.out.println("Image: " + images);
+		    				product.setImage(images);
 		    		}//end of for getting imageUrl
 	  				
 	  			}//end of for k1
@@ -81,6 +88,7 @@ public class MmogaScraper extends WebScraper {
 	  				
 	  				String prices = price.get(k2).select("del").text();
 		    			System.out.println("Price: " + prices);
+		    		product.setPrice(prices);	
 	  				
 	  			}//end of for k2
 	  			
@@ -95,17 +103,21 @@ public class MmogaScraper extends WebScraper {
 	  					String linkGame = linkUrl.attributes().get("href");
 	  						String links = "https://www.mmoga.co.uk" + linkGame;
 	  						System.out.println("Link: " + links);
-	  					
+	  					product.setLink(links);
 	  				}//end of for getLink
 	  				
 	  			}//end of for k3
 	  			
 	  		}//end of for j
 	  		
+	  		productDao.save(product);
+	  		
 	  	}//end of for i
 	  	
 		}//end of 1st for loop
 		
 	}//end of scrapeMmogaGameData
-	
+	 public void setProductDao(ProductDao productDao) {
+		 this.productDao = productDao;
+	 }
 }//end of public class

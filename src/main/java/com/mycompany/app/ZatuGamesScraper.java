@@ -7,8 +7,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class ZatuGamesScraper extends WebScraper{
+import com.mycompany.app.dao.ProductDao;
+import com.mycompany.app.entity.Product;
 
+public class ZatuGamesScraper extends WebScraper{
+	ProductDao productDao = null;
 	public void run() {
 		stopThread = false;
 		while(!stopThread) {			
@@ -46,9 +49,10 @@ public class ZatuGamesScraper extends WebScraper{
 	  		Elements prodWrappers = prods.select(".zg-product");
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
-
+	  			Product product = new Product(); 
 	  			String titles = prodWrappers.get(j).select(".zg-product-title").text();
   				System.out.println("\nTitle: " + titles);
+  				product.setTitle(titles);
   				
 	  			Elements imageContainer = prodWrappers.get(j).select(".zg-product-image-container");
 	  			
@@ -60,6 +64,7 @@ public class ZatuGamesScraper extends WebScraper{
 		  				
 		  				String images = gameImage.attributes().get("src");
 		  					System.out.println("Image: " + images);
+		  					product.setImage(images);
 		  			}
 	  				
 	  			}//end of getting image
@@ -68,6 +73,7 @@ public class ZatuGamesScraper extends WebScraper{
 	  			
 	  			if (prices != null) {
 	  				System.out.println("Price: " + prices);
+	  				product.setPrice(prices);
 	  			}//ignoring products where price is null
 	  			
 	  			Elements linkContainer = prodWrappers.get(j).select(".zg-product-image-container");
@@ -80,10 +86,11 @@ public class ZatuGamesScraper extends WebScraper{
 		  				
 		  				String links = gameLink.attributes().get("href");
 		  					System.out.println("Link: " + links);
+		  					product.setLink(links);
 		  			}
 	  				
 	  			}//end of getting game link
-	  			
+	  			productDao.save(product);
 	  		}//end of 3rd for
 	  		
 	  	}//end of 2nd for
@@ -91,5 +98,7 @@ public class ZatuGamesScraper extends WebScraper{
 	  }//end of 1st for
 		
 	}//end of scrapeSimplyGamesGameData()
-
+	 public void setProductDao(ProductDao productDao) {
+		 this.productDao = productDao;
+	 }
 }//end of public class

@@ -4,9 +4,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.mycompany.app.config.AppBean;
+import com.mycompany.app.dao.ProductDao;
+import com.mycompany.app.entity.Product;
+
 import java.io.IOException;
 
 public class EnebaScraper extends WebScraper {
+	ProductDao productDao = null;
 	
 	public void run() {
 		stopThread = false;
@@ -48,10 +56,11 @@ public class EnebaScraper extends WebScraper {
 	  		Elements prodWrappers = prods.select("._2rxjGA");
 	  		
 	  		for(int j=0; j<prodWrappers.size(); j++) {
-	  		
+	  			Product product = new Product(); 
 	    		// Gets the title of the game 
 	    		String titles = prodWrappers.get(j).select("._1ZwRcm").text();
-	    			System.out.println("\nTitle: " + titles);
+	    			System.out.println("\nTitlem: " + titles);
+	    			product.setTitle(titles);
 	    		
 	    		// Gets the image of the game
 	    		Elements image = prodWrappers.get(j).select("img");
@@ -60,7 +69,7 @@ public class EnebaScraper extends WebScraper {
 	    			
 	    			String images = imageUrl.attributes().get("src");
 	    				System.out.println("Image: " + images);
-	    			
+	    			product.setImage(images);
 	    		}// end of image link for loop
 	    		
 	    		// Gets the link of the game
@@ -69,13 +78,13 @@ public class EnebaScraper extends WebScraper {
 	    		// Gets the price of the game
 	    		String prices = prodWrappers.get(j).select("._3RZkEb").text();
 	    			System.out.println("Price: " + prices);
-	    		
+	    		product.setPrice(prices);
 	    		for(Element linkUrl : link) {
 	    			
 	    			String linkGame = linkUrl.attributes().get("href");
 	    				String links = "https://www.eneba.com" + linkGame;
 	    					System.out.println("Link: " + links);
-	    			
+	    			product.setLink(links);		
 	    			//scraping info from each linkGame
 	    			for(int b=0; b<link.size(); b++) {
 	    				
@@ -95,7 +104,7 @@ public class EnebaScraper extends WebScraper {
 	    			}//end of url2 for loop
 	    			
 	    		}// end of game link for loop
-	    		
+	    		productDao.save(product);
 	  		}//end of 3rd for loop
   		
 	  	}//end of 2nd for loop
@@ -104,5 +113,8 @@ public class EnebaScraper extends WebScraper {
 		
   }//end of scrapeEnebaGameData
 	
+ public void setProductDao(ProductDao productDao) {
+	 this.productDao = productDao;
+ }
 }//end of public class
 
