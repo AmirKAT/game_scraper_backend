@@ -8,25 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 public class Product {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	@Column
 	private String title;
-	
+
 	@Column
 	private String image;
-	
+
 	@Column
 	private String price;
-	
+
 	@Column
 	private String link;
-	
-	public Product() {}
+
+	public Product() {
+	}
 
 	public Product(String title, String image, String price, String link) {
 		super();

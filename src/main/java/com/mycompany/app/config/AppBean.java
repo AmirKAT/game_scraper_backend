@@ -17,14 +17,11 @@ import com.mycompany.app.dao.ProductDao;
 @Configuration
 public class AppBean {
 	SessionFactory sessionFactory = null;
-	
-	/**
-	 * it will create session factory instance, IF already create it will return same object
-	 * @return
-	 */
+
+//below creates a session factory instance, if one has already been created it will return same object
 	@Bean
 	public SessionFactory sessionFactory() {
-		if(sessionFactory==null) {
+		if (sessionFactory == null) {
 			StandardServiceRegistryBuilder standardServiceRegistryBuilder = new StandardServiceRegistryBuilder();
 			standardServiceRegistryBuilder.configure("hibernate.cfg.xml");
 			StandardServiceRegistry registry = standardServiceRegistryBuilder.build();
@@ -32,46 +29,43 @@ public class AppBean {
 		}
 		return sessionFactory;
 	}
-	
-	/**
-	 * it will return product dao
-	 * @return
-	 */
+
+//below returns product Dao
 	@Bean
 	public ProductDao productDao() {
 		ProductDao productDao = new ProductDao();
 		productDao.setSessionFactory(this.sessionFactory());
-        return productDao;
+		return productDao;
 	}
-	
+
 	@Bean
 	public EnebaScraper enebaScraper() {
 		EnebaScraper enebaScraper = new EnebaScraper();
 		enebaScraper.setProductDao(this.productDao());
 		return enebaScraper;
 	}
-	
+
 	@Bean
 	public MmogaScraper mmogaScraper() {
 		MmogaScraper mmogaScraper = new MmogaScraper();
 		mmogaScraper.setProductDao(this.productDao());
 		return mmogaScraper;
 	}
-	
+
 	@Bean
 	public GamingDragonScraper gamingDragonScraper() {
-		GamingDragonScraper gamingDragonScraper=new GamingDragonScraper();
+		GamingDragonScraper gamingDragonScraper = new GamingDragonScraper();
 		gamingDragonScraper.setProductDao(this.productDao());
 		return gamingDragonScraper;
 	}
-	
+
 	@Bean
 	public AmazonGamesScraper amazonGamesScraper() {
-		AmazonGamesScraper amazonGamesScraper=new AmazonGamesScraper();
+		AmazonGamesScraper amazonGamesScraper = new AmazonGamesScraper();
 		amazonGamesScraper.setProductDao(this.productDao());
 		return amazonGamesScraper;
 	}
-	
+
 	@Bean
 	public ZatuGamesScraper zatuGamesScraper() {
 		ZatuGamesScraper zatuGamesScraper = new ZatuGamesScraper();
