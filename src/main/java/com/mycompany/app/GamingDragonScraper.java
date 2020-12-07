@@ -114,6 +114,7 @@ public class GamingDragonScraper extends WebScraper {
 
 										String genres = genre.get(k5).select("a").text();
 										System.out.println("Genre: " + genres);
+										product.setGenre(genres);
 
 									} // end of getGenre
 

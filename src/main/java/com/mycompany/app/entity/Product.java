@@ -25,16 +25,20 @@ public class Product {
 
 	@Column
 	private String link;
+	
+	@Column
+	private String genre;
 
 	public Product() {
 	}
 
-	public Product(String title, String image, String price, String link) {
+	public Product(String title, String image, String price, String link, String genre) {
 		super();
 		this.title = title;
 		this.image = image;
 		this.price = price;
 		this.link = link;
+		this.genre = genre;
 	}
 
 	public int getId() {
@@ -75,6 +79,14 @@ public class Product {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+	
+	public String getGenre() {
+		return link;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 }

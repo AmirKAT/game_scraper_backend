@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-   		<property name="connection.url">jdbc:postgresql://localhost:5432/my-app</property> <!-- Connection URL -->
+   		<property name="connection.url">jdbc:postgresql://localhost:5432/gamerhaven</property> <!-- Connection URL -->
    		<property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
    		<property name="connection.username">postgres</property> <!-- DB User -->
    		<property name="connection.password">password</property> <!-- DB Password -->

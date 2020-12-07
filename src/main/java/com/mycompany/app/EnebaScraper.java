@@ -49,7 +49,7 @@ public class EnebaScraper extends WebScraper {
 
 			Elements prods = doc.select("._3M7T08");
 
-			// need: title, genre, image, link, price, platform
+			// need: title, genre, image, link, price
 
 			for (int i = 0; i < prods.size(); ++i) {
 
@@ -98,6 +98,7 @@ public class EnebaScraper extends WebScraper {
 
 								String genres = prods2.get(c).select("._3w9_g5").text();
 								System.out.println("Genre: " + genres);
+								product.setGenre(genres);
 
 							} // end of for loop to connect to link game
 
