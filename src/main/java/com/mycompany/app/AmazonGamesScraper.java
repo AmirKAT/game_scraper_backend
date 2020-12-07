@@ -11,7 +11,7 @@ import com.mycompany.app.dao.ProductDao;
 import com.mycompany.app.entity.Product;
 
 public class AmazonGamesScraper extends WebScraper {
-	private ProductDao productDao = null;
+	ProductDao productDao = null;
 
 	public void run() {
 		stopThread = false;
