@@ -17,7 +17,7 @@ public class App {
 		WebScraperManager webScraperManager = (WebScraperManager) applicationContext.getBean("webScraperManager");
 
 		// starts all scrapers
-		webScraperManager.initializeScraperManager();
+		webScraperManager.startWebScraperManager();
 
 	}
 }
