@@ -4,10 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import com.mycompany.app.config.AppBean;
 import com.mycompany.app.dao.ProductDao;
 import com.mycompany.app.entity.Product;
 

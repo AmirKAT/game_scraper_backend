@@ -4,48 +4,20 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.mycompany.app.config.AppBean;
+import com.mycompany.app.config.WebScraperManager;
 
 public class App {
 
 	public static void main(String[] args) {
-		/**
-		 * here it will configure bean class
-		 */
-		ApplicationContext context = new AnnotationConfigApplicationContext(AppBean.class);
-		try {
-			EnebaScraper enebaScraper = (EnebaScraper) context.getBean("enebaScraper");
-			enebaScraper.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 
-		try {
-			MmogaScraper mmogaScraper = (MmogaScraper) context.getBean("mmogaScraper");
-			mmogaScraper.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		// below configures the bean class
+		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppBean.class);
 
-		try {
-			GamingDragonScraper gamingDragonScraper = (GamingDragonScraper) context.getBean("gamingDragonScraper");
-			gamingDragonScraper.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		// injecting the dependencies to the scraping manager
+		WebScraperManager webScraperManager = (WebScraperManager) applicationContext.getBean("webScraperManager");
 
-		try {
-			AmazonGamesScraper amazonGamesScraper = (AmazonGamesScraper) context.getBean("amazonGamesScraper");
-			amazonGamesScraper.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		try {
-			ZatuGamesScraper zatuGamesScraper = new ZatuGamesScraper();
-			zatuGamesScraper.start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+		// starts all scrapers
+		webScraperManager.initializeScraperManager();
 
 	}
 }

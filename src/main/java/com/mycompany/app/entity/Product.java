@@ -25,7 +25,7 @@ public class Product {
 
 	@Column
 	private String link;
-	
+
 	@Column
 	private String genre;
 
@@ -80,9 +80,9 @@ public class Product {
 	public void setLink(String link) {
 		this.link = link;
 	}
-	
+
 	public String getGenre() {
-		return link;
+		return genre;
 	}
 
 	public void setGenre(String genre) {

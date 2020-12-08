@@ -1,5 +1,7 @@
 package com.mycompany.app.config;
 
+import java.util.ArrayList;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -11,6 +13,7 @@ import com.mycompany.app.AmazonGamesScraper;
 import com.mycompany.app.EnebaScraper;
 import com.mycompany.app.GamingDragonScraper;
 import com.mycompany.app.MmogaScraper;
+import com.mycompany.app.WebScraper;
 import com.mycompany.app.ZatuGamesScraper;
 import com.mycompany.app.dao.ProductDao;
 
@@ -36,6 +39,22 @@ public class AppBean {
 		ProductDao productDao = new ProductDao();
 		productDao.setSessionFactory(this.sessionFactory());
 		return productDao;
+	}
+
+	@Bean
+	public WebScraperManager webScraperManager() {
+		WebScraperManager webScraperManager = new WebScraperManager();
+
+		ArrayList<WebScraper> webScrapers = new ArrayList<>();
+		webScrapers.add(enebaScraper());
+		webScrapers.add(gamingDragonScraper());
+		webScrapers.add(mmogaScraper());
+		webScrapers.add(amazonGamesScraper());
+		webScrapers.add(zatuGamesScraper());
+
+		webScraperManager.setScrapers(webScrapers);
+
+		return webScraperManager;
 	}
 
 	@Bean
