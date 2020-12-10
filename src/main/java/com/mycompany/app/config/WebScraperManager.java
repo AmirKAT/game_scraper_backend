@@ -9,8 +9,8 @@ public class WebScraperManager {
 
 	// starts the web scrapers
 	public void startWebScraperManager() {
-		for (WebScraper scraper : webScrapers) {
-			scraper.start();
+		for (WebScraper gameScraper : webScrapers) {
+			gameScraper.start();
 		}
 	}
 
