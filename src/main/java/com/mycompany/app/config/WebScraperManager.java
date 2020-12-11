@@ -14,11 +14,10 @@ public class WebScraperManager {
 		}
 	}
 
-	// below gets the list of web scrapers and also sets them
+	// gets the list of web scrapers and also sets them
 	public ArrayList<WebScraper> getScrapers() {
 		return webScrapers;
 	}
-
 
 	public void setScrapers(ArrayList<WebScraper> webScrapers) {
 		this.webScrapers = webScrapers;

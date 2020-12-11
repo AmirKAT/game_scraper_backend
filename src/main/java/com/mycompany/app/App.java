@@ -10,10 +10,10 @@ public class App {
 
 	public static void main(String[] args) {
 
-		// below configures the bean class
+		// spring annotations configured from AppBean file
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppBean.class);
 
-		// injecting the dependencies to the scraping manager
+		// injecting the dependencies to webScraperManager
 		WebScraperManager webScraperManager = (WebScraperManager) applicationContext.getBean("webScraperManager");
 
 		// starts all scrapers

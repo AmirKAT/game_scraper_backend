@@ -13,6 +13,7 @@ import com.mycompany.app.entity.Product;
 public class GamingDragonScraper extends WebScraper {
 	ProductDao productDao = null;
 
+	//runs scraper thread
 	public void run() {
 		stopThread = false;
 		while (!stopThread) {
@@ -26,20 +27,14 @@ public class GamingDragonScraper extends WebScraper {
 		}
 	}
 
-//data required || variable name that scrapes the data
-//--------------||------------------------------------
-//title  			  ||	titles
-//image  			  ||	images
-//price 			  ||	prices
-//link  			  ||  links
-//genre  			  ||	genres
-
+	//scraper for gaming dragon game data
 	void scrapeGamingDragonGameData() throws IOException {
 		for (int a = 1; a < 7; a++) {
 
 			String url = "https://www.gamingdragons.com/en/xbox-live?page=" + a;
 			System.out.println("Scraping GamingDragons page " + a);
 			System.out.println("url:" + url);
+			
 			// Downloading HTML document from the site
 			Document doc = Jsoup.connect(url).get();
 
@@ -51,7 +46,8 @@ public class GamingDragonScraper extends WebScraper {
 
 				for (int j = 0; j < prodWrappers.size(); j++) {
 					Product product = new Product();
-
+					
+					// gets the title of all games 
 					Elements title = prodWrappers.get(j).select(".game-title");
 
 					for (int k = 0; k < title.size(); k++) {
@@ -67,6 +63,7 @@ public class GamingDragonScraper extends WebScraper {
 
 					} // end of k for
 
+					// gets the image of all games
 					Elements image = prodWrappers.get(j).select(".game-img");
 
 					for (int k2 = 0; k2 < image.size(); k2++) {
@@ -83,9 +80,12 @@ public class GamingDragonScraper extends WebScraper {
 
 					} // end of k2 for
 
+					// gets the price of all games
 					String prices = prodWrappers.get(j).select(".game-price").text();
 					System.out.println("Price: " + prices);
 					product.setPrice(prices);
+					
+					// gets the link of all games
 					Elements link = prodWrappers.get(j).select(".game-img");
 
 					for (int k3 = 0; k3 < link.size(); k3++) {
@@ -107,7 +107,8 @@ public class GamingDragonScraper extends WebScraper {
 								Elements prods2 = doc2.select("#product");
 
 								for (int k4 = 0; k4 < prods2.size(); k4++) {
-
+									
+									// gets the genre of all games
 									Elements genre = prods2.select(".miniInfo");
 
 									for (int k5 = 0; k5 < genre.size(); k5++) {

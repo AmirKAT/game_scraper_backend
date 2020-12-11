@@ -13,6 +13,7 @@ import com.mycompany.app.entity.Product;
 public class ZatuGamesScraper extends WebScraper {
 	ProductDao productDao = null;
 
+	//runs scraper thread
 	public void run() {
 		stopThread = false;
 		while (!stopThread) {
@@ -26,13 +27,7 @@ public class ZatuGamesScraper extends WebScraper {
 		}
 	}
 
-//data required || variable name that scrapes the data
-//--------------||------------------------------------
-//title  			  ||	titles
-//image  			  ||	images
-//price 			  ||	prices
-//link  			  ||  links
-
+	//scraper for zatu game data
 	void scrapeZatuGamesGameData() throws IOException {
 		for (int a = 1; a < 24; a++) {
 
@@ -51,10 +46,13 @@ public class ZatuGamesScraper extends WebScraper {
 
 				for (int j = 0; j < prodWrappers.size(); j++) {
 					Product product = new Product();
+					
+					// gets the title of all games
 					String titles = prodWrappers.get(j).select(".zg-product-title").text();
 					System.out.println("\nTitle: " + titles);
 					product.setTitle(titles);
 
+					// gets the image of all games
 					Elements imageContainer = prodWrappers.get(j).select(".zg-product-image-container");
 
 					for (int k1 = 0; k1 < imageContainer.size(); k1++) {
@@ -70,6 +68,7 @@ public class ZatuGamesScraper extends WebScraper {
 
 					} // end of getting image
 
+					// gets the price of all games
 					String prices = prodWrappers.get(j).select("span.woocommerce-Price-amount.amount").first().text();
 
 					if (prices != null) {
@@ -77,6 +76,7 @@ public class ZatuGamesScraper extends WebScraper {
 						product.setPrice(prices);
 					} // ignoring products where price is null
 
+					// gets the link of all games
 					Elements linkContainer = prodWrappers.get(j).select(".zg-product-image-container");
 
 					for (int k2 = 0; k2 < linkContainer.size(); k2++) {

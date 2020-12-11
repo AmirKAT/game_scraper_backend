@@ -46,7 +46,7 @@ public class AppBean {
 		WebScraperManager webScraperManager = new WebScraperManager();
 
 		ArrayList<WebScraper> webScrapers = new ArrayList<>();
-		
+
 		webScrapers.add(enebaScraper());
 		webScrapers.add(gamingDragonScraper());
 		webScrapers.add(mmogaScraper());

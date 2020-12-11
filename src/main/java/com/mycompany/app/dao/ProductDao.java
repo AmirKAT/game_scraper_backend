@@ -8,6 +8,7 @@ import com.mycompany.app.entity.Product;
 public class ProductDao {
 	SessionFactory sessionFactory = null;
 
+  // creates a session for when a connection to the database is required by all the threads
 	public void save(Product product) {
 
 		Session session = sessionFactory.openSession();

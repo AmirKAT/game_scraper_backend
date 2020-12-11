@@ -13,6 +13,7 @@ import com.mycompany.app.entity.Product;
 public class AmazonGamesScraper extends WebScraper {
 	ProductDao productDao = null;
 
+	// runs scraper thread
 	public void run() {
 		stopThread = false;
 		while (!stopThread) {
@@ -26,16 +27,11 @@ public class AmazonGamesScraper extends WebScraper {
 		}
 	}
 
-//data required || variable name that scrapes the data
-//--------------||------------------------------------
-//title  			  ||	titles
-//image  			  ||	images
-//price 			  ||	prices
-//link  			  ||  links
-
+	// scraper for amazon game data
 	void scrapeAmazonGameData() throws IOException {
 		for (int a = 1; a < 333; a++) {
-
+			
+			// providing the link for amazons game page
 			String url = "https://www.amazon.co.uk/s?i=videogames&rh=n%3A13978691031&page=" + a
 			    + "&qid=1607156844&rd=1&ref=sr_pg_" + a;
 			System.out.println(url);
@@ -49,12 +45,15 @@ public class AmazonGamesScraper extends WebScraper {
 			for (int i = 0; i < prods.size(); i++) {
 
 				Elements prodWrappers = prods.select(".s-include-content-margin.s-border-bottom.s-latency-cf-section");
-
+				
+				// gets the title of all games
 				for (int j = 0; j < prodWrappers.size(); j++) {
 					Product product = new Product();
 					String titles = prodWrappers.get(j).select(".a-size-medium.a-color-base.a-text-normal").text();
 					System.out.println("\nTitle: " + titles);
 					product.setTitle(titles);
+					
+					// gets the image of all games
 					Elements image = prodWrappers.get(j).select("img");
 
 					for (Element gameImage : image) {
@@ -63,7 +62,8 @@ public class AmazonGamesScraper extends WebScraper {
 						System.out.println("Image: " + images);
 						product.setImage(images);
 					} // end of getting image link
-
+					
+					// gets the price of all games
 					Element price = prodWrappers.get(j).select(".a-offscreen").first();
 
 					if (price != null) {
@@ -71,7 +71,8 @@ public class AmazonGamesScraper extends WebScraper {
 						System.out.println("Price: " + prices);
 						product.setPrice(prices);
 					} // ignoring products where price is null
-
+					
+					// gets the link to the games purchase page
 					Elements link = prodWrappers.get(j).select("a.a-link-normal.s-no-outline");
 
 					for (Element gameLink : link) {
@@ -81,7 +82,7 @@ public class AmazonGamesScraper extends WebScraper {
 						System.out.println("Link: " + links);
 						product.setLink(links);
 					} // end of getting image link
-
+					
 					productDao.save(product);
 
 				} // end of 3rd for

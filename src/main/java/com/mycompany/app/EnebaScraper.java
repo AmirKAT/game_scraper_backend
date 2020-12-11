@@ -12,6 +12,7 @@ import java.io.IOException;
 public class EnebaScraper extends WebScraper {
 	ProductDao productDao = null;
 
+	//runs scraper thread
 	public void run() {
 		stopThread = false;
 		while (!stopThread) {
@@ -25,14 +26,7 @@ public class EnebaScraper extends WebScraper {
 		}
 	}
 
-//  data required || variable name that scrapes the data
-//	--------------||------------------------------------
-//	title  			  ||	titles
-//	image  			  ||	images
-//	price 			  ||	prices
-//	link  			  ||  links
-//	genre  			  ||	genres
-
+	//scraper for eneba game data
 	void scrapeEnebaGameData() throws IOException {
 		for (int a = 1; a < 62; a++) {
 
@@ -45,14 +39,13 @@ public class EnebaScraper extends WebScraper {
 
 			Elements prods = doc.select("._3M7T08");
 
-			// need: title, genre, image, link, price
-
 			for (int i = 0; i < prods.size(); ++i) {
 
 				Elements prodWrappers = prods.select("._2rxjGA");
 
 				for (int j = 0; j < prodWrappers.size(); j++) {
 					Product product = new Product();
+					
 					// Gets the title of the game
 					String titles = prodWrappers.get(j).select("._1ZwRcm").text();
 					System.out.println("\nTitlem: " + titles);

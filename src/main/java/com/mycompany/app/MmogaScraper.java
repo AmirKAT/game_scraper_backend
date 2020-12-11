@@ -12,6 +12,7 @@ import com.mycompany.app.entity.Product;
 public class MmogaScraper extends WebScraper {
 	ProductDao productDao = null;
 
+	//runs scraper thread
 	public void run() {
 		stopThread = false;
 		while (!stopThread) {
@@ -25,13 +26,7 @@ public class MmogaScraper extends WebScraper {
 		}
 	}
 
-//data required || variable name that scrapes the data
-//--------------||------------------------------------
-//title  			  ||	titles
-//image  			  ||	images
-//price 			  ||	prices
-//link  			  ||  links
-
+	//scraper for mmoga game data
 	void scrapeMmogaGameData() throws IOException {
 		for (int a = 1; a < 10; a++) {
 
@@ -51,6 +46,7 @@ public class MmogaScraper extends WebScraper {
 
 				for (int j = 0; j < prodWrappers.size(); j++) {
 
+					// gets the title of all games
 					Elements title = prodWrappers.get(j).select(".keyImg");
 
 					for (int k = 0; k < title.size(); k++) {
@@ -66,6 +62,7 @@ public class MmogaScraper extends WebScraper {
 
 					} // end of for k
 
+					// gets the image of all games
 					Elements image = prodWrappers.get(j).select(".keyImg");
 
 					for (int k1 = 0; k1 < image.size(); k1++) {
@@ -82,6 +79,7 @@ public class MmogaScraper extends WebScraper {
 
 					} // end of for k1
 
+					// gets the price of all games
 					Elements price = prodWrappers.get(j).select(".keyPrice");
 
 					for (int k2 = 0; k2 < price.size(); k2++) {
@@ -92,6 +90,7 @@ public class MmogaScraper extends WebScraper {
 
 					} // end of for k2
 
+					// gets the link of all games
 					Elements link = prodWrappers.get(j).select(".keyImg");
 
 					for (int k3 = 0; k3 < link.size(); k3++) {
